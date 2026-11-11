@@ -3,6 +3,10 @@
 Expo（SDK 58 / React Native 0.88 / TypeScript）の最小構成です。
 PC に Node.js を入れずに、Docker だけで開発サーバー（Metro）を動かし、スマホの **Expo Go** アプリで画面を確認します。
 
+このリポジトリを GitHub からクローンして使います（公開リポジトリなので、GitHub アカウントやログインは不要）。
+
+- リポジトリ: https://github.com/kokikurahashi/react-native-docker-template
+
 - **Mac** → 「A-1. 最初の一回だけやること（Mac）」→「B. 毎回やること」
 - **Windows** → 「A-2. 最初の一回だけやること（Windows）」→「B. 毎回やること」
 
@@ -29,11 +33,12 @@ PC に Node.js を入れずに、Docker だけで開発サーバー（Metro）�
   docker compose version
   ```
   どちらもバージョン番号が出れば OK。
-- [ ] **`make` コマンドがあるか確認する**
+- [ ] **`git` と `make` があるか確認する**
   ```bash
+  git --version
   make --version
   ```
-  「command not found」やインストールを促すダイアログが出たら、次を実行して「インストール」を押す（数分かかる）。
+  「command not found」やインストールを促すダイアログが出たら、次を実行して「インストール」を押す（数分かかる。git と make の両方が入る）。
   ```bash
   xcode-select --install
   ```
@@ -44,12 +49,15 @@ PC に Node.js を入れずに、Docker だけで開発サーバー（Metro）�
 
 ### 3. プロジェクトの準備
 
-- [ ] **このフォルダを手元に置く**（git で管理しているなら `git clone`、そうでなければフォルダごとコピー）
-- [ ] **ターミナルでこのフォルダに移動する**
+- [ ] **リポジトリをクローンする**（ターミナルで実行。ホームフォルダの下に `react-native-docker-template` ができる）
   ```bash
-  cd ~/Documents/GitHub/react-native-docker-template
+  cd ~
+  git clone https://github.com/kokikurahashi/react-native-docker-template.git
   ```
-  （置いた場所に合わせて変える。Finder からフォルダをターミナルにドラッグすると場所が入力される）
+- [ ] **クローンしたフォルダに移動する**
+  ```bash
+  cd ~/react-native-docker-template
+  ```
 - [ ] **アプリ名を変える（任意）** → 「[アプリ名の変え方](#アプリ名の変え方任意)」
 
 ### 4. Docker イメージを作る
@@ -139,17 +147,12 @@ Windows では **WSL 2（Windows の中で動く Linux / Ubuntu）の中で開�
 
 ### 3. プロジェクトの準備
 
-- [ ] **このフォルダを Ubuntu のホーム（`~`）に置く**（`C:\` の下には置かない）
-  - git で管理している場合（Ubuntu で実行）
-    ```bash
-    cd ~
-    git clone <このリポジトリの URL>
-    ```
-  - フォルダをもらった場合: Windows のダウンロードフォルダなどから Ubuntu にコピーする
-    ```bash
-    cp -r /mnt/c/Users/<Windowsのユーザー名>/Downloads/react-native-docker-template ~/
-    ```
-- [ ] **Ubuntu でこのフォルダに移動する**
+- [ ] **リポジトリを Ubuntu のホーム（`~`）にクローンする**（Ubuntu で実行。`C:\`（`/mnt/c/...`）の下には置かない）
+  ```bash
+  cd ~
+  git clone https://github.com/kokikurahashi/react-native-docker-template.git
+  ```
+- [ ] **クローンしたフォルダに移動する**
   ```bash
   cd ~/react-native-docker-template
   ```
@@ -213,8 +216,7 @@ Windows では **WSL 2（Windows の中で動く Linux / Ubuntu）の中で開�
 - [ ] スマホと PC が同じ Wi-Fi にいるか確認する
 - [ ] このフォルダに移動して起動する
   ```bash
-  cd ~/Documents/GitHub/react-native-docker-template   # Mac の例
-  cd ~/react-native-docker-template                    # Windows（Ubuntu）の例
+  cd ~/react-native-docker-template
   make up
   ```
 - [ ] ターミナルに QR コードと `› Metro: exp://192.168.x.x:8081` が出るのを待つ
@@ -250,6 +252,14 @@ Windows では **WSL 2（Windows の中で動く Linux / Ubuntu）の中で開�
   例: `make install PKG=expo-router`
 - [ ] `package.json` と `package-lock.json` が書き換わるので、そのままコミットする
 - [ ] イメージにも反映するため、次回起動の前に `make build` する
+
+### 最新を取り込むとき（`git pull`）
+
+- [ ] 最新のコードを取り込む
+  ```bash
+  git pull
+  ```
+- [ ] `package.json` が変わっていなければ、そのまま `make up` でよい
 
 ### 他の人が追加したパッケージを取り込んだとき（`git pull` で `package.json` が変わったとき）
 
